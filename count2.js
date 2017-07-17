@@ -12,6 +12,9 @@ const rpap = rp.defaults({
   }
 });
 
+const count = {};
+let pageLen;
+
 function main(url = '/') {
  /* request.get(url, (error, res, body) => {
     console.log('code', res.statusCode);
@@ -33,20 +36,36 @@ function main(url = '/') {
 
   rpap(url).then(($) => {
     const $articles = $('.list-group-item a');
+    pageLen = $articles.length;
     _.each($articles, (ele) => {
-      console.log($(ele).attr('href'));
+      //console.log($(ele).attr('href'));
       getArticle($(ele).attr('href'));
     });
   })
 }
 
+let total = 0;
+
 function getArticle(url) {
   rpap(url).then(($) => {
+    --pageLen;
+    total += $('h4 a').length;
     const $authors = $('h5 code');
     _.each($authors, (ele) => {
       const authorArr = $(ele).text().split('：');
-      console.log('author', authorArr);
+      //console.log('author', authorArr);
+      if (!count[authorArr[1]]) {
+        count[authorArr[1]] = {
+          '推荐人': 0,
+          '作者': 0
+        }
+      }
+      ++count[authorArr[1]][authorArr[0]];
     });
+    if (0 === pageLen) {
+      console.log('total', total);
+      console.log(count);
+    }
   });
 }
 
