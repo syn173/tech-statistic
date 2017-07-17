@@ -1,0 +1,19 @@
+{
+  "name": "tech-count",
+  "version": "1.0.0",
+  "description": "",
+  "main": "count.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "iconv-lite": "^0.4.15",
+    "lodash": "^4.17.4",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "true-html-escape": "^1.0.0"
+  }
+}
